@@ -51,6 +51,7 @@ fun DrinkList(
     var searchQuery by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     var selectedFilter by remember { mutableStateOf("All") }
+    var selectedDrink by remember { mutableStateOf<Drink?>(null) }
 
     // Filter drinks based on the selected filter and search query
     val filteredDrinks = drinks.filter { drink ->
@@ -107,7 +108,9 @@ fun DrinkList(
                         )
                     }
                 }
-                DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                DropdownMenu(
+                    modifier = Modifier.fillMaxWidth(),
+                    expanded = expanded, onDismissRequest = { expanded = false }) {
                     categories.forEach { category ->
                         DropdownMenuItem(
                             text = { Text(category) },
@@ -129,7 +132,7 @@ fun DrinkList(
             }
         },
         content = { innerPadding ->
-            LazyColumn(
+                        LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
                     .padding(innerPadding)
@@ -146,3 +149,25 @@ fun DrinkList(
         }
     )
 }
+
+//if (selectedDrink != null) {
+//    DrinkDetailScreen(drink = selectedDrink!!) {
+//        selectedDrink = null // Go back to listing
+//    }
+//} else {
+//    LazyColumn(
+//        modifier = modifier
+//            .fillMaxSize()
+//            .padding(innerPadding)
+//    ) {
+//        items(filteredDrinks) { drink ->
+//            DrinkCard(
+//                drinkName = drink.strDrink,
+//                category = drink.strCategory,
+//                glassType = drink.strGlass,
+//                imageUrl = drink.strDrinkThumb,
+//                modifier = Modifier.clickable { selectedDrink = drink }
+//            )
+//        }
+//    }
+//}

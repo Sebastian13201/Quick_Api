@@ -72,7 +72,7 @@ dependencies {
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.5")
     // Mock
-    testImplementation ("io.mockk:mockk:1.12.0")
+    testImplementation ("io.mockk:mockk:1.13.8")
     testImplementation ("androidx.arch.core:core-testing:2.1.0")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 }
