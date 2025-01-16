@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "624410312489",
+    "project_id": "quick-api-799c8",
+    "storage_bucket": "quick-api-799c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624410312489:android:185f5868e0aa8a4b74c138",
+        "android_client_info": {
+          "package_name": "com.compose.quickapi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoqCyFLWtnWlXOl5JjIwuxau6evgQ6Zr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
