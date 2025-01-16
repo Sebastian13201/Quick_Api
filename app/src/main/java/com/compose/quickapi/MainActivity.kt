@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     Log.d("MainActivity", "User authenticated: $isUserAuthenticated")
 
                     if (isLoading) {
-                        CircularProgressIndicator() // Display a loading indicator
+                        CircularProgressIndicator()
                     } else if (isUserAuthenticated) {
                         DrinkList(
                             drinks = drinks,

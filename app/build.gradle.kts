@@ -71,4 +71,6 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.4.2")
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.5")
+    // Mock
+    testImplementation ("io.mockk:mockk:1.12.0")
 }

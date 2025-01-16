@@ -3,13 +3,7 @@ package com.compose.quickapi.data
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-
-object ApiDetails {
-    const val BASE_URL = "https://www.thecocktaildb.com/"
-    const val ENDPOINT_USER = "api/json/v1/1/search.php?f=a"
-}
 
 class ApiService(private val client: HttpClient) {
     private val baseUrl = "https://www.thecocktaildb.com/api/json/v1/1"
