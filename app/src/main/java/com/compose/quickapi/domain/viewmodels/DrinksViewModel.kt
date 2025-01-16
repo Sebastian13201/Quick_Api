@@ -1,4 +1,4 @@
-package com.compose.quickapi.viewmodels
+package com.compose.quickapi.domain.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,13 +10,16 @@ import kotlinx.coroutines.launch
 
 class DrinksViewModel(private val apiService: ApiService) : ViewModel() {
     private val _drinks = MutableStateFlow<List<Drink>>(emptyList())
-    val drinks: StateFlow<List<Drink>> = _drinks
+    val drinks: StateFlow<List<Drink>> get() = _drinks
 
-    // Update to no longer take the letter, use the fixed API endpoint
-    fun fetchDrinks() {
+    fun fetchDrinksByLetter(letter: String) {
         viewModelScope.launch {
-            val drinksList = apiService.getDrinks()
-            _drinks.value = drinksList
+            try {
+                val drinksList = apiService.getListByLetter(letter)
+                _drinks.value = drinksList
+            } catch (e: Exception) {
+                _drinks.value = emptyList() // Handle error appropriately
+            }
         }
     }
 }

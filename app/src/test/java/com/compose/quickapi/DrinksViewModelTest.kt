@@ -3,7 +3,7 @@ package com.compose.quickapi
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.compose.quickapi.data.ApiService
 import com.compose.quickapi.data.Drink
-import com.compose.quickapi.viewmodels.DrinksViewModel
+import com.compose.quickapi.domain.viewmodels.DrinksViewModel
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.mockk

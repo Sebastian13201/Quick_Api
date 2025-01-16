@@ -1,4 +1,4 @@
-package com.compose.quickapi.di
+package com.compose.quickapi.domain.di
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext

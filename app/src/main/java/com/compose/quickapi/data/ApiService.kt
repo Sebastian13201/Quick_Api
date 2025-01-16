@@ -16,4 +16,12 @@ class ApiService(private val client: HttpClient) {
         val apiResponse = json.decodeFromString<DrinksResponse>(responseBody)
         return apiResponse.drinks ?: emptyList()
     }
+    suspend fun getListByLetter(letter: String): List<Drink> {
+        val response: HttpResponse = client.get("$baseUrl/search.php?f=$letter")
+        val responseBody = response.bodyAsText()
+
+        val json = Json { ignoreUnknownKeys = true }
+        val apiResponse = json.decodeFromString<DrinksResponse>(responseBody)
+        return apiResponse.drinks ?: emptyList()
+    }
 }

@@ -1,4 +1,4 @@
-package com.compose.quickapi
+package com.compose.quickapi.presentation
 
 import android.os.Bundle
 import android.util.Log
@@ -16,42 +16,45 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.compose.quickapi.ui.drinks.DrinkList
-import com.compose.quickapi.ui.login.LoginScreen
-import com.compose.quickapi.ui.theme.QuickApiTheme
-import com.compose.quickapi.viewmodels.AuthViewModel
-import com.compose.quickapi.viewmodels.DrinksViewModel
+import com.compose.quickapi.presentation.ui.drinks.DrinkList
+import com.compose.quickapi.presentation.ui.login.LoginScreen
+import com.compose.quickapi.presentation.ui.theme.QuickApiTheme
+import com.compose.quickapi.domain.viewmodels.AuthViewModel
+import com.compose.quickapi.domain.viewmodels.DrinksViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+    private val authViewModel: AuthViewModel by viewModel()
+    private val drinksViewModel: DrinksViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             QuickApiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val authViewModel: AuthViewModel by viewModel()
-                    val drinksViewModel: DrinksViewModel by viewModel()
-                    val drinks = drinksViewModel.drinks.collectAsState().value
+                    val drinks by drinksViewModel.drinks.collectAsState()
                     val isUserAuthenticated by authViewModel.isUserAuthenticated.collectAsState()
                     var isLoading by remember { mutableStateOf(true) }
 
                     LaunchedEffect(isUserAuthenticated) {
-                        isLoading = false
                         if (isUserAuthenticated) {
-                            drinksViewModel.fetchDrinks()
+                            drinksViewModel.fetchDrinksByLetter("A")
                         }
+                        isLoading = false
                     }
+
                     // Log authentication status
                     Log.d("MainActivity", "User authenticated: $isUserAuthenticated")
 
                     if (isLoading) {
-                        CircularProgressIndicator()
+                        CircularProgressIndicator(modifier = Modifier.padding(innerPadding))
                     } else if (isUserAuthenticated) {
                         DrinkList(
                             drinks = drinks,
                             modifier = Modifier.padding(innerPadding),
-                            authViewModel = authViewModel
+                            authViewModel = authViewModel,
+                            viewModel = drinksViewModel
                         )
                     } else {
                         LoginScreen(authViewModel = authViewModel)

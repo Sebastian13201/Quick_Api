@@ -1,4 +1,4 @@
-package com.compose.quickapi.ui.theme
+package com.compose.quickapi.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

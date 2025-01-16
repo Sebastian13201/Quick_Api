@@ -1,4 +1,4 @@
-package com.compose.quickapi.ui.theme
+package com.compose.quickapi.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.compose.quickapi.viewmodels
+package com.compose.quickapi.domain.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

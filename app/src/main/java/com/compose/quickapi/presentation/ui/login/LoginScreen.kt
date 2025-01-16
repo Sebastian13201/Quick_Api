@@ -1,4 +1,4 @@
-package com.compose.quickapi.ui.login
+package com.compose.quickapi.presentation.ui.login
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -9,7 +9,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.compose.quickapi.viewmodels.AuthViewModel
+import com.compose.quickapi.domain.viewmodels.AuthViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun LoginScreen(authViewModel: AuthViewModel) {
@@ -72,5 +73,5 @@ fun LoginScreen(authViewModel: AuthViewModel) {
 @Composable
 fun LoginScreenPreview() {
     // Note: Provide a mock or a test instance of AuthViewModel for the preview.
-    LoginScreen(authViewModel = AuthViewModel(firebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance()))
+    LoginScreen(authViewModel = AuthViewModel(firebaseAuth = FirebaseAuth.getInstance()))
 }

@@ -1,4 +1,4 @@
-package com.compose.quickapi.ui.drinks
+package com.compose.quickapi.presentation.ui.drinks
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

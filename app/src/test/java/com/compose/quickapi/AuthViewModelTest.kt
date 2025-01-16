@@ -1,7 +1,7 @@
 package com.compose.quickapi
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.compose.quickapi.viewmodels.AuthViewModel
+import com.compose.quickapi.domain.viewmodels.AuthViewModel
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
