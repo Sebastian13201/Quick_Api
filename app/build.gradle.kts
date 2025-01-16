@@ -69,4 +69,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
     // Koin for Dependency Injection
     implementation("io.insert-koin:koin-android:3.4.2")
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.5")
 }

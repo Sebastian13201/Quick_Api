@@ -15,14 +15,22 @@ class AuthViewModel(private val firebaseAuth: FirebaseAuth) : ViewModel() {
     private val _isUserAuthenticated = MutableStateFlow(firebaseAuth.currentUser != null)
     val isUserAuthenticated: StateFlow<Boolean> = _isUserAuthenticated
 
+    init {
+        firebaseAuth.addAuthStateListener { auth ->
+            _currentUser.value = auth.currentUser
+            _isUserAuthenticated.value = auth.currentUser != null
+        }
+    }
+
     fun signIn(email: String, password: String, onError: (String) -> Unit) {
         viewModelScope.launch {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     _currentUser.value = firebaseAuth.currentUser
+                    _isUserAuthenticated.value = true
                 }
                 .addOnFailureListener {
-                    onError(it.localizedMessage ?: "Unknown error")
+                    onError(it.localizedMessage ?: "Login Failed")
                 }
         }
     }
@@ -32,9 +40,10 @@ class AuthViewModel(private val firebaseAuth: FirebaseAuth) : ViewModel() {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     _currentUser.value = firebaseAuth.currentUser
+                    _isUserAuthenticated.value = true
                 }
                 .addOnFailureListener {
-                    onError(it.localizedMessage ?: "Unknown error")
+                    onError(it.localizedMessage ?: "SignUp Failed")
                 }
         }
     }
@@ -42,5 +51,6 @@ class AuthViewModel(private val firebaseAuth: FirebaseAuth) : ViewModel() {
     fun signOut() {
         firebaseAuth.signOut()
         _currentUser.value = null
+        _isUserAuthenticated.value = false
     }
 }
