@@ -11,6 +11,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -41,11 +43,16 @@ fun DrinkList(
     modifier: Modifier = Modifier
 ) {
     var searchQuery by remember { mutableStateOf("") }
+    var expanded by remember { mutableStateOf(false) }
+    var selectedFilter by remember { mutableStateOf("All") }
 
-    //search
+    // Filter drinks based on the selected filter and search query
     val filteredDrinks = drinks.filter { drink ->
-        drink.idDrink.contains(searchQuery, ignoreCase = true)
+        (selectedFilter == "All" || drink.strCategory == selectedFilter) &&
+                drink.strDrink.contains(searchQuery, ignoreCase = true)
     }
+
+    val categories = drinks.map { it.strCategory }.distinct() + "All"
 
     Scaffold(
         modifier = Modifier.padding(top = 8.dp),
@@ -60,10 +67,7 @@ fun DrinkList(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text("Drink List", style = MaterialTheme.typography.headlineMedium)
-                            IconButton(
-                                onClick = {
-                                }
-                            ) {
+                            IconButton(onClick = { expanded = true }) {
                                 Icon(Icons.Filled.Edit, contentDescription = "Filter")
                             }
                         }
@@ -80,6 +84,18 @@ fun DrinkList(
                         containerColor = MaterialTheme.colorScheme.surface
                     )
                 )
+                // Dropdown menu for filtering drinks
+                DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                    categories.forEach { category ->
+                        DropdownMenuItem(
+                            text = { Text(category) },
+                            onClick = {
+                                selectedFilter = category
+                                expanded = false
+                            }
+                        )
+                    }
+                }
             }
         },
         floatingActionButton = {
@@ -98,7 +114,7 @@ fun DrinkList(
             ) {
                 items(filteredDrinks) { drink ->
                     DrinkCard(
-                        drinkName = drink.idDrink,
+                        drinkName = drink.strDrink,
                         category = drink.strCategory,
                         glassType = drink.strGlass,
                         imageUrl = drink.strDrinkThumb
