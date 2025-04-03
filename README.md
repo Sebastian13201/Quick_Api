@@ -52,4 +52,4 @@ A modern Android app built with Jetpack Compose that helps users discover cockta
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/cocktail-explorer.git
+   git clone https://github.com/Sebastian13201/Quick_Api.git
