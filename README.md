@@ -26,7 +26,7 @@ A modern Android app built with Jetpack Compose that helps users discover cockta
 
 ---
 
-##ScreenShots
+## ScreenShots
 
 <img width="328" alt="Screenshot 8 43 37 PM" src="https://github.com/user-attachments/assets/be48c7ba-19bb-4913-aee1-eac4ec127278" />
 <img width="327" alt="Screenshot 8 43 06 PM" src="https://github.com/user-attachments/assets/bea3955a-ed96-4f27-97a9-09169d0f502a" />
